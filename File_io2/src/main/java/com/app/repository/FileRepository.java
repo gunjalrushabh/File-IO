@@ -10,6 +10,6 @@ import com.app.enitity.FileEntity;
 @Repository
 public interface FileRepository extends JpaRepository<FileEntity, Long> {
 	
-//	FileEntity findByFilePath(String path); // don't do it
+//	FileEntity findByFilePath(String path); // don't do it return type should be Optional findBy methods
 	Optional<FileEntity> findByFilePath(String path);
 }

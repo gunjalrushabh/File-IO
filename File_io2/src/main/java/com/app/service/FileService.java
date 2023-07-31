@@ -68,11 +68,15 @@ public class FileService {
     }
     
     public FileEntity getFileByFilePath(String filePath) {
-    	Optional<FileEntity> path =  repo.findByFilePath(filePath);
-    	if(path.isPresent()) {
-    		return path.get();
+    	Optional<FileEntity> file =  repo.findByFilePath(filePath);
+    	FileEntity fileModel = file.get();
+    	fileModel.setModified_at(LocalDate.now());
+    	fileModel.setStatus("File Modified at "+LocalDate.now());
+    	System.out.println("Downloaded File : "+fileModel.toString());
+    	if(file.isPresent()) {
+    		return fileModel;
     	}else {
-    		throw new FileException("File not Found having path : "+path);
+    		throw new FileException("File not Found having path : "+filePath);
     	}
     }
 }
